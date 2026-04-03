@@ -1,0 +1,799 @@
+[
+  {
+    "name": "annotated_screenshot",
+    "title": "annotated_screenshot",
+    "description": "Capture a screenshot with numbered Set-of-Marks labels drawn on interactive elements (zero ML, instant). Returns the annotated image and a text index with click coordinates.",
+    "routePath": "computer_control/annotated_screenshot",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "Target application name. If omitted, uses the frontmost application"
+        },
+        "maxLabels": {
+          "type": "number",
+          "description": "Maximum number of element labels",
+          "default": 50
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "apps",
+    "title": "apps",
+    "description": "List all running foreground applications with their name, PID, frontmost status, and visibility",
+    "routePath": "computer_control/apps",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "batch",
+    "title": "batch",
+    "description": "Execute multiple computer control actions in sequence within a single request. Reduces round-trip latency for multi-step workflows.",
+    "routePath": "computer_control/batch",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": ""
+          },
+          "description": "Array of actions to execute sequentially"
+        },
+        "stopOnError": {
+          "type": "boolean",
+          "description": "Stop execution on first failure",
+          "default": false
+        }
+      },
+      "required": [
+        "actions"
+      ]
+    }
+  },
+  {
+    "name": "click",
+    "title": "click",
+    "description": "Click an element by @eN index (AX API), text query (AX find + coordinate click), or x/y coordinates (CGEvent fallback)",
+    "routePath": "computer_control/click",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference (e.g. 0 for @e0). Uses AX API."
+        },
+        "query": {
+          "type": "string",
+          "description": "Text query to find and click element (AX find then click at center coordinates)"
+        },
+        "x": {
+          "type": "number",
+          "description": "X coordinate for direct coordinate click (CGEvent fallback)"
+        },
+        "y": {
+          "type": "number",
+          "description": "Y coordinate for direct coordinate click (CGEvent fallback)"
+        },
+        "button": {
+          "type": "string",
+          "description": "Mouse button (supported values: left, right)",
+          "default": "left"
+        },
+        "clickCount": {
+          "type": "number",
+          "description": "Number of clicks (2 for double-click)",
+          "default": 1
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "context",
+    "title": "context",
+    "description": "Get orientation context: frontmost app, window title, focused element. Helps agents understand the current state before acting.",
+    "routePath": "computer_control/context",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "drag",
+    "title": "drag",
+    "description": "Drag from one element to another using @eN snapshot references",
+    "routePath": "computer_control/drag",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "fromIndex": {
+          "type": "number",
+          "description": "Source element index @eN reference"
+        },
+        "toIndex": {
+          "type": "number",
+          "description": "Target element index @eN reference"
+        },
+        "duration": {
+          "type": "number",
+          "description": "Duration of the drag in milliseconds",
+          "default": 500
+        }
+      },
+      "required": [
+        "fromIndex",
+        "toIndex"
+      ]
+    }
+  },
+  {
+    "name": "element_at",
+    "title": "element_at",
+    "description": "Identify what element is at a specific screen coordinate. Returns full metadata: role, name, value, position, size, actions, and owning app.",
+    "routePath": "computer_control/element_at",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "X coordinate (screen pixels from left)"
+        },
+        "y": {
+          "type": "number",
+          "description": "Y coordinate (screen pixels from top)"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    }
+  },
+  {
+    "name": "fill",
+    "title": "fill",
+    "description": "Set the value of an input element directly (bypasses character-by-character typing). Use for text fields, text areas, and other editable elements.",
+    "routePath": "computer_control/fill",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value to set"
+        },
+        "submit": {
+          "type": "boolean",
+          "description": "Submit after filling (press Enter)",
+          "default": false
+        }
+      },
+      "required": [
+        "index",
+        "value"
+      ]
+    }
+  },
+  {
+    "name": "find",
+    "title": "find",
+    "description": "Find elements in the AX tree by name, role, or value. Returns matching elements with position and metadata.",
+    "routePath": "computer_control/find",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Text query to search for (matches name, value, or description)"
+        },
+        "role": {
+          "type": "string",
+          "description": "Filter by AX role (e.g. \"AXButton\", \"AXTextField\"). Can omit \"AX\" prefix."
+        },
+        "name": {
+          "type": "string",
+          "description": "Filter by name/title (case-insensitive partial match)"
+        },
+        "value": {
+          "type": "string",
+          "description": "Filter by value (case-insensitive partial match)"
+        },
+        "appName": {
+          "type": "string",
+          "description": "Target application name"
+        },
+        "maxResults": {
+          "type": "number",
+          "description": "Maximum number of results",
+          "default": 20
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "focus",
+    "title": "focus",
+    "description": "Set keyboard focus to an element identified by @eN index",
+    "routePath": "computer_control/focus",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        }
+      },
+      "required": [
+        "index"
+      ]
+    }
+  },
+  {
+    "name": "get_attribute",
+    "title": "get_attribute",
+    "description": "Get a specific accessibility attribute from an element by @eN index",
+    "routePath": "computer_control/get_attribute",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "Accessibility attribute name (e.g. \"AXValue\", \"AXTitle\", \"AXRole\", \"AXDescription\", \"AXHelp\")",
+          "default": "AXValue"
+        }
+      },
+      "required": [
+        "index"
+      ]
+    }
+  },
+  {
+    "name": "get_content",
+    "title": "get_content",
+    "description": "Get the text content of the current window from the frontmost (or specified) application. Returns app name, window title, and all visible text.",
+    "routePath": "computer_control/get_content",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "Target application name. If omitted, uses the frontmost application"
+        },
+        "includeTree": {
+          "type": "boolean",
+          "description": "Include the full accessibility tree",
+          "default": true
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "get_element_info",
+    "title": "get_element_info",
+    "description": "Get comprehensive information about an element: role, name, value, position, size, enabled, focused, child count, and available actions",
+    "routePath": "computer_control/get_element_info",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        }
+      },
+      "required": [
+        "index"
+      ]
+    }
+  },
+  {
+    "name": "get_text",
+    "title": "get_text",
+    "description": "Get the text content of an element by @eN index. Returns the element's value, name, title, or description — whichever is available.",
+    "routePath": "computer_control/get_text",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        }
+      },
+      "required": [
+        "index"
+      ]
+    }
+  },
+  {
+    "name": "hotkey",
+    "title": "hotkey",
+    "description": "Press a key combination like Cmd+L, Cmd+Return, Cmd+Shift+P. Modifiers are held while the final key is pressed.",
+    "routePath": "computer_control/hotkey",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": ""
+          },
+          "description": "Key combination as array, last element is the key, rest are modifiers. E.g. [\"cmd\", \"shift\", \"p\"] for Cmd+Shift+P"
+        }
+      },
+      "required": [
+        "keys"
+      ]
+    }
+  },
+  {
+    "name": "hover",
+    "title": "hover",
+    "description": "Move the mouse cursor to hover over an element identified by @eN index",
+    "routePath": "computer_control/hover",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        }
+      },
+      "required": [
+        "index"
+      ]
+    }
+  },
+  {
+    "name": "inspect",
+    "title": "inspect",
+    "description": "Get complete metadata for one element: role, subrole, name, value, description, help text, position, size, actions, DOM id, identifier, editable state, and owning app. Accepts @eN index or x/y coordinates.",
+    "routePath": "computer_control/inspect",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        },
+        "x": {
+          "type": "number",
+          "description": "X coordinate to inspect element at point"
+        },
+        "y": {
+          "type": "number",
+          "description": "Y coordinate to inspect element at point"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "is_enabled",
+    "title": "is_enabled",
+    "description": "Check if an element is enabled (not disabled/grayed out)",
+    "routePath": "computer_control/is_enabled",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        }
+      },
+      "required": [
+        "index"
+      ]
+    }
+  },
+  {
+    "name": "is_visible",
+    "title": "is_visible",
+    "description": "Check if an element is visible (has non-zero bounds and is within the screen area)",
+    "routePath": "computer_control/is_visible",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        }
+      },
+      "required": [
+        "index"
+      ]
+    }
+  },
+  {
+    "name": "long_press",
+    "title": "long_press",
+    "description": "Press and hold at an element or coordinates for a duration. Useful for context menus, Force Touch previews, and drag initiation.",
+    "routePath": "computer_control/long_press",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference"
+        },
+        "x": {
+          "type": "number",
+          "description": "X coordinate for direct coordinate long press"
+        },
+        "y": {
+          "type": "number",
+          "description": "Y coordinate for direct coordinate long press"
+        },
+        "duration": {
+          "type": "number",
+          "description": "Duration to hold in seconds",
+          "default": 1
+        },
+        "button": {
+          "type": "string",
+          "description": "Mouse button (supported values: left, right)",
+          "default": "left"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "mouse",
+    "title": "mouse",
+    "description": "Low-level mouse control: move, click, double-click, right-click, mouse down/up at specific screen coordinates",
+    "routePath": "computer_control/mouse",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Mouse action to perform (supported values: move, click, doubleClick, rightClick, mouseDown, mouseUp)"
+        },
+        "x": {
+          "type": "number",
+          "description": "X coordinate (screen pixels from left)"
+        },
+        "y": {
+          "type": "number",
+          "description": "Y coordinate (screen pixels from top)"
+        }
+      },
+      "required": [
+        "action",
+        "x",
+        "y"
+      ]
+    }
+  },
+  {
+    "name": "open_app",
+    "title": "open_app",
+    "description": "Open (activate) a macOS application by name. If already running, brings it to the foreground.",
+    "routePath": "computer_control/open_app",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "Application name to open (e.g. \"Finder\", \"Safari\", \"System Settings\")"
+        }
+      },
+      "required": [
+        "appName"
+      ]
+    }
+  },
+  {
+    "name": "press",
+    "title": "press",
+    "description": "Press a keyboard key or shortcut (e.g. Cmd+C, Enter, Escape). Works globally — sends to the frontmost application.",
+    "routePath": "computer_control/press",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key to press. Single character (\"a\", \"1\") or named key (\"return\", \"escape\", \"tab\", \"space\", \"delete\", \"up\", \"down\", \"left\", \"right\", \"f1\"-\"f12\", \"home\", \"end\", \"pageup\", \"pagedown\")"
+        },
+        "modifiers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": ""
+          },
+          "description": "Modifier keys to hold. Array of: \"command\"/\"cmd\", \"shift\", \"option\"/\"alt\", \"control\"/\"ctrl\""
+        }
+      },
+      "required": [
+        "key"
+      ]
+    }
+  },
+  {
+    "name": "read",
+    "title": "read",
+    "description": "Extract text content from any app window or element subtree, with depth control for nested content. Recursively collects visible text from static text, text fields, headings, and links.",
+    "routePath": "computer_control/read",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "number",
+          "description": "Element index from snapshot @eN reference. If omitted, reads from the frontmost window."
+        },
+        "appName": {
+          "type": "string",
+          "description": "Target application name"
+        },
+        "maxDepth": {
+          "type": "number",
+          "description": "Maximum depth for nested content extraction",
+          "default": 10
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "run_applescript",
+    "title": "run_applescript",
+    "description": "Execute an AppleScript or JXA (JavaScript for Automation) script and return the result",
+    "routePath": "computer_control/run_applescript",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "The script to execute"
+        },
+        "language": {
+          "type": "string",
+          "description": "Script language (supported values: applescript, jxa)",
+          "default": "applescript"
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Execution timeout in milliseconds",
+          "default": 30000
+        }
+      },
+      "required": [
+        "script"
+      ]
+    }
+  },
+  {
+    "name": "screenshot",
+    "title": "screenshot",
+    "description": "Capture a screenshot of the entire screen and return as a displayable image",
+    "routePath": "computer_control/screenshot",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Image format (supported values: png, jpg)",
+          "default": "png"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "scroll",
+    "title": "scroll",
+    "description": "Scroll the page in a direction or scroll a specific element into view",
+    "routePath": "computer_control/scroll",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "Scroll direction (supported values: up, down, left, right)",
+          "default": "down"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Scroll amount (number of scroll units, each ~3 lines)",
+          "default": 3
+        },
+        "index": {
+          "type": "number",
+          "description": "Element index to scroll into view (overrides direction/amount). Uses @eN ref from snapshot."
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "snapshot",
+    "title": "snapshot",
+    "description": "Generate an accessibility tree snapshot with @eN references using the AX API with semantic depth tunneling.",
+    "routePath": "computer_control/snapshot",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "interactiveOnly": {
+          "type": "boolean",
+          "description": "Only include interactive elements (buttons, inputs, etc.) in the tree",
+          "default": false
+        },
+        "maxDepth": {
+          "type": "number",
+          "description": "Maximum UI tree traversal depth (uses semantic depth tunneling — empty layout containers cost 0)",
+          "default": 25
+        },
+        "appName": {
+          "type": "string",
+          "description": "Target application name. If omitted, uses the frontmost application"
+        },
+        "pid": {
+          "type": "number",
+          "description": "Target process ID. Overrides appName if specified"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "state",
+    "title": "state",
+    "description": "List every running app with its windows, positions, and sizes. Provides a unified view of the entire desktop state.",
+    "routePath": "computer_control/state",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "status",
+    "title": "status",
+    "description": "Get the current status of the computer control module: cached element count, target app, and running apps summary",
+    "routePath": "computer_control/status",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "type",
+    "title": "type",
+    "description": "Type text character by character using keyboard events. Optionally focus an element first by @eN index.",
+    "routePath": "computer_control/type",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to type"
+        },
+        "index": {
+          "type": "number",
+          "description": "Element index to focus before typing. If omitted, types into the currently focused element"
+        },
+        "delay": {
+          "type": "number",
+          "description": "Delay between keystrokes in milliseconds. 0 for instant.",
+          "default": 0
+        }
+      },
+      "required": [
+        "text"
+      ]
+    }
+  },
+  {
+    "name": "wait",
+    "title": "wait",
+    "description": "Wait for a condition to be met (element appears/disappears, title changes, or fixed delay). Polls at the specified interval until timeout.",
+    "routePath": "computer_control/wait",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "Condition to wait for (supported values: elementExists, elementGone, titleContains, titleChanged, delay)"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value to match against (element name, title substring)"
+        },
+        "appName": {
+          "type": "string",
+          "description": "Target application name"
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Timeout in seconds",
+          "default": 30
+        },
+        "interval": {
+          "type": "number",
+          "description": "Poll interval in seconds",
+          "default": 0.5
+        }
+      },
+      "required": [
+        "condition"
+      ]
+    }
+  },
+  {
+    "name": "window",
+    "title": "window",
+    "description": "Manage application windows: list, minimize, maximize, restore, close, move, or resize any window.",
+    "routePath": "computer_control/window",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Action to perform (supported values: list, minimize, maximize, restore, close, move, resize, fullscreen)"
+        },
+        "appName": {
+          "type": "string",
+          "description": "Target application name. If omitted, uses the frontmost app"
+        },
+        "window": {
+          "type": "string",
+          "description": "Window title substring to match. If omitted, targets the first window"
+        },
+        "x": {
+          "type": "number",
+          "description": "X position for move action"
+        },
+        "y": {
+          "type": "number",
+          "description": "Y position for move action"
+        },
+        "width": {
+          "type": "number",
+          "description": "Width for resize action"
+        },
+        "height": {
+          "type": "number",
+          "description": "Height for resize action"
+        }
+      },
+      "required": [
+        "action"
+      ]
+    }
+  },
+  {
+    "name": "windows",
+    "title": "windows",
+    "description": "List all windows of an application with their index, title, position, size, and minimized status",
+    "routePath": "computer_control/windows",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "Application name. If omitted, lists windows of the frontmost app"
+        }
+      },
+      "required": []
+    }
+  }
+]

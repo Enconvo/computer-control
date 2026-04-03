@@ -1,0 +1,34 @@
+{
+  "$schema": "https://enconvo.com/schemas/extension.json",
+  "name": "computer_control",
+  "version": "0.0.2",
+  "description": "Control any macOS application using the Accessibility API. Navigate UI trees, click elements, type text, take screenshots, read content, scroll, and more. Works with any app that supports macOS accessibility — Finder, System Settings, Notes, Xcode, and beyond.",
+  "title": "Computer Control",
+  "icon": "icon.png",
+  "author": "EnconvoAI",
+  "categories": [
+    "Tools"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "minAppVersion": "1.8.8",
+  "commands": [],
+  "preferences": [],
+  "lifecycle": {
+    "onAppStarted": {
+      "type": "shell",
+      "command": "test -f assets/accessibility-helper || (cd swift-helper && swiftc -O -o ../assets/accessibility-helper AccessibilityHelper.swift -framework ApplicationServices -framework AppKit -framework CoreGraphics 2>/dev/null)"
+    }
+  },
+  "dependencies": {
+    "@enconvo/api": "link:../../enconvo.nodejs/enconvo_api"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "build": "enconvo dev",
+    "dev": "enconvo dev --dev"
+  }
+}
