@@ -4,7 +4,7 @@ description: >
   Control any macOS application using the Accessibility API. Navigate UI trees, click elements, type text, take screenshots, read content, scroll, and more. Works with any app that supports macOS accessibility — Finder, System Settings, Notes, Xcode, and beyond.
 metadata:
   author: EnconvoAI
-  version: "0.0.2"
+  version: "0.0.9"
 ---
 
 ## API Reference
