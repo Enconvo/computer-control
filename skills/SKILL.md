@@ -4,7 +4,7 @@ description: >
   Control any macOS application using the Accessibility API. Navigate UI trees, click elements, type text, take screenshots, read content, scroll, and more. Works with any app that supports macOS accessibility — Finder, System Settings, Notes, Xcode, and beyond.
 metadata:
   author: EnconvoAI
-  version: "0.0.9"
+  version: "0.0.22"
 ---
 
 ## API Reference
@@ -37,6 +37,7 @@ Just use the `local_api` tool to request these APIs.
 | `computer_control/open_app` | Open (activate) a macOS application by name. If already running, brings it to the foreground.. Params: `appName` (string, required) |
 | `computer_control/press` | Press a keyboard key or shortcut (e.g. Cmd+C, Enter, Escape). Works globally — sends to the frontmost application.. Params: `key` (string, required), `modifiers` (array) |
 | `computer_control/read` | Extract text content from any app window or element subtree, with depth control for nested content. Recursively collects visible text from static text, text fields, headings, and links.. Params: `index` (number), `appName` (string), `maxDepth` (number, default: 10) |
+| `computer_control/record_audio` | Record system audio + microphone to a WAV file. Flow: call with `action: "start"` to begin, then optionally `pause` / `resume`, and finally `stop` to receive the WAV file path. Use `cancel` to discard, or `status` to query the current session.. Params: `action` (string, required), `outputPath` (string), `includingApplications` (array) |
 | `computer_control/run_applescript` | Execute an AppleScript or JXA (JavaScript for Automation) script and return the result. Params: `script` (string, required), `language` (string, default: "applescript"), `timeout` (number, default: 30000) |
 | `computer_control/screenshot` | Capture a screenshot of the entire screen and return as a displayable image. Params: `format` (string, default: "png") |
 | `computer_control/scroll` | Scroll the page in a direction or scroll a specific element into view. Params: `direction` (string, default: "down"), `amount` (number, default: 3), `index` (number) |

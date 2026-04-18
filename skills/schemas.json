@@ -553,6 +553,36 @@
     }
   },
   {
+    "name": "record_audio",
+    "title": "record_audio",
+    "description": "Record system audio + microphone to a WAV file. Flow: call with `action: \"start\"` to begin, then optionally `pause` / `resume`, and finally `stop` to receive the WAV file path. Use `cancel` to discard, or `status` to query the current session.",
+    "routePath": "computer_control/record_audio",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Action to perform on the audio recording session (supported values: start, pause, resume, stop, cancel, status)"
+        },
+        "outputPath": {
+          "type": "string",
+          "description": "Output file path without extension. Only used by \"start\". Defaults to ~/Documents/.enconvo/MeetingRecordings/Recording-<timestamp>"
+        },
+        "includingApplications": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": ""
+          },
+          "description": "Bundle IDs of apps to include in system audio capture. Empty array records all apps. Only used by \"start\"."
+        }
+      },
+      "required": [
+        "action"
+      ]
+    }
+  },
+  {
     "name": "run_applescript",
     "title": "run_applescript",
     "description": "Execute an AppleScript or JXA (JavaScript for Automation) script and return the result",
