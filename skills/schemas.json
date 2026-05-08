@@ -3,7 +3,7 @@
     "name": "annotated_screenshot",
     "title": "annotated_screenshot",
     "description": "Capture a screenshot with numbered Set-of-Marks labels drawn on interactive elements (zero ML, instant). Returns the annotated image and a text index with click coordinates.",
-    "routePath": "computer_control/annotated_screenshot",
+    "routePath": "computer-use/annotated_screenshot",
     "parameters": {
       "type": "object",
       "properties": {
@@ -24,7 +24,7 @@
     "name": "apps",
     "title": "apps",
     "description": "List all running foreground applications with their name, PID, frontmost status, and visibility",
-    "routePath": "computer_control/apps",
+    "routePath": "computer-use/apps",
     "parameters": {
       "type": "object",
       "properties": {},
@@ -35,7 +35,7 @@
     "name": "batch",
     "title": "batch",
     "description": "Execute multiple computer control actions in sequence within a single request. Reduces round-trip latency for multi-step workflows.",
-    "routePath": "computer_control/batch",
+    "routePath": "computer-use/batch",
     "parameters": {
       "type": "object",
       "properties": {
@@ -62,7 +62,7 @@
     "name": "click",
     "title": "click",
     "description": "Click an element by @eN index (AX API), text query (AX find + coordinate click), or x/y coordinates (CGEvent fallback)",
-    "routePath": "computer_control/click",
+    "routePath": "computer-use/click",
     "parameters": {
       "type": "object",
       "properties": {
@@ -100,7 +100,7 @@
     "name": "context",
     "title": "context",
     "description": "Get orientation context: frontmost app, window title, focused element. Helps agents understand the current state before acting.",
-    "routePath": "computer_control/context",
+    "routePath": "computer-use/context",
     "parameters": {
       "type": "object",
       "properties": {},
@@ -111,7 +111,7 @@
     "name": "drag",
     "title": "drag",
     "description": "Drag from one element to another using @eN snapshot references",
-    "routePath": "computer_control/drag",
+    "routePath": "computer-use/drag",
     "parameters": {
       "type": "object",
       "properties": {
@@ -139,7 +139,7 @@
     "name": "element_at",
     "title": "element_at",
     "description": "Identify what element is at a specific screen coordinate. Returns full metadata: role, name, value, position, size, actions, and owning app.",
-    "routePath": "computer_control/element_at",
+    "routePath": "computer-use/element_at",
     "parameters": {
       "type": "object",
       "properties": {
@@ -162,7 +162,7 @@
     "name": "fill",
     "title": "fill",
     "description": "Set the value of an input element directly (bypasses character-by-character typing). Use for text fields, text areas, and other editable elements.",
-    "routePath": "computer_control/fill",
+    "routePath": "computer-use/fill",
     "parameters": {
       "type": "object",
       "properties": {
@@ -190,7 +190,7 @@
     "name": "find",
     "title": "find",
     "description": "Find elements in the AX tree by name, role, or value. Returns matching elements with position and metadata.",
-    "routePath": "computer_control/find",
+    "routePath": "computer-use/find",
     "parameters": {
       "type": "object",
       "properties": {
@@ -227,7 +227,7 @@
     "name": "focus",
     "title": "focus",
     "description": "Set keyboard focus to an element identified by @eN index",
-    "routePath": "computer_control/focus",
+    "routePath": "computer-use/focus",
     "parameters": {
       "type": "object",
       "properties": {
@@ -245,7 +245,7 @@
     "name": "get_attribute",
     "title": "get_attribute",
     "description": "Get a specific accessibility attribute from an element by @eN index",
-    "routePath": "computer_control/get_attribute",
+    "routePath": "computer-use/get_attribute",
     "parameters": {
       "type": "object",
       "properties": {
@@ -268,7 +268,7 @@
     "name": "get_content",
     "title": "get_content",
     "description": "Get the text content of the current window from the frontmost (or specified) application. Returns app name, window title, and all visible text.",
-    "routePath": "computer_control/get_content",
+    "routePath": "computer-use/get_content",
     "parameters": {
       "type": "object",
       "properties": {
@@ -289,7 +289,7 @@
     "name": "get_element_info",
     "title": "get_element_info",
     "description": "Get comprehensive information about an element: role, name, value, position, size, enabled, focused, child count, and available actions",
-    "routePath": "computer_control/get_element_info",
+    "routePath": "computer-use/get_element_info",
     "parameters": {
       "type": "object",
       "properties": {
@@ -307,7 +307,7 @@
     "name": "get_text",
     "title": "get_text",
     "description": "Get the text content of an element by @eN index. Returns the element's value, name, title, or description — whichever is available.",
-    "routePath": "computer_control/get_text",
+    "routePath": "computer-use/get_text",
     "parameters": {
       "type": "object",
       "properties": {
@@ -325,7 +325,7 @@
     "name": "hotkey",
     "title": "hotkey",
     "description": "Press a key combination like Cmd+L, Cmd+Return, Cmd+Shift+P. Modifiers are held while the final key is pressed.",
-    "routePath": "computer_control/hotkey",
+    "routePath": "computer-use/hotkey",
     "parameters": {
       "type": "object",
       "properties": {
@@ -347,7 +347,7 @@
     "name": "hover",
     "title": "hover",
     "description": "Move the mouse cursor to hover over an element identified by @eN index",
-    "routePath": "computer_control/hover",
+    "routePath": "computer-use/hover",
     "parameters": {
       "type": "object",
       "properties": {
@@ -365,7 +365,7 @@
     "name": "inspect",
     "title": "inspect",
     "description": "Get complete metadata for one element: role, subrole, name, value, description, help text, position, size, actions, DOM id, identifier, editable state, and owning app. Accepts @eN index or x/y coordinates.",
-    "routePath": "computer_control/inspect",
+    "routePath": "computer-use/inspect",
     "parameters": {
       "type": "object",
       "properties": {
@@ -389,7 +389,7 @@
     "name": "is_enabled",
     "title": "is_enabled",
     "description": "Check if an element is enabled (not disabled/grayed out)",
-    "routePath": "computer_control/is_enabled",
+    "routePath": "computer-use/is_enabled",
     "parameters": {
       "type": "object",
       "properties": {
@@ -407,7 +407,7 @@
     "name": "is_visible",
     "title": "is_visible",
     "description": "Check if an element is visible (has non-zero bounds and is within the screen area)",
-    "routePath": "computer_control/is_visible",
+    "routePath": "computer-use/is_visible",
     "parameters": {
       "type": "object",
       "properties": {
@@ -425,7 +425,7 @@
     "name": "long_press",
     "title": "long_press",
     "description": "Press and hold at an element or coordinates for a duration. Useful for context menus, Force Touch previews, and drag initiation.",
-    "routePath": "computer_control/long_press",
+    "routePath": "computer-use/long_press",
     "parameters": {
       "type": "object",
       "properties": {
@@ -459,7 +459,7 @@
     "name": "mouse",
     "title": "mouse",
     "description": "Low-level mouse control: move, click, double-click, right-click, mouse down/up at specific screen coordinates",
-    "routePath": "computer_control/mouse",
+    "routePath": "computer-use/mouse",
     "parameters": {
       "type": "object",
       "properties": {
@@ -487,7 +487,7 @@
     "name": "open_app",
     "title": "open_app",
     "description": "Open (activate) a macOS application by name. If already running, brings it to the foreground.",
-    "routePath": "computer_control/open_app",
+    "routePath": "computer-use/open_app",
     "parameters": {
       "type": "object",
       "properties": {
@@ -505,7 +505,7 @@
     "name": "press",
     "title": "press",
     "description": "Press a keyboard key or shortcut (e.g. Cmd+C, Enter, Escape). Works globally — sends to the frontmost application.",
-    "routePath": "computer_control/press",
+    "routePath": "computer-use/press",
     "parameters": {
       "type": "object",
       "properties": {
@@ -531,7 +531,7 @@
     "name": "read",
     "title": "read",
     "description": "Extract text content from any app window or element subtree, with depth control for nested content. Recursively collects visible text from static text, text fields, headings, and links.",
-    "routePath": "computer_control/read",
+    "routePath": "computer-use/read",
     "parameters": {
       "type": "object",
       "properties": {
@@ -556,7 +556,7 @@
     "name": "record_audio",
     "title": "record_audio",
     "description": "Record system audio + microphone to a WAV file. Flow: call with `action: \"start\"` to begin, then optionally `pause` / `resume`, and finally `stop` to receive the WAV file path. Use `cancel` to discard, or `status` to query the current session.",
-    "routePath": "computer_control/record_audio",
+    "routePath": "computer-use/record_audio",
     "parameters": {
       "type": "object",
       "properties": {
@@ -574,7 +574,22 @@
             "type": "string",
             "description": ""
           },
-          "description": "Bundle IDs of apps to include in system audio capture. Empty array records all apps. Only used by \"start\"."
+          "description": "Bundle IDs of apps to include in system audio capture. Empty array records all running apps. Only used by \"start\" and only when recordSystemAudio is true."
+        },
+        "recordMicrophone": {
+          "type": "boolean",
+          "description": "Capture the microphone. Only used by \"start\".",
+          "default": true
+        },
+        "recordSystemAudio": {
+          "type": "boolean",
+          "description": "Capture system audio via ScreenCaptureKit. Only used by \"start\".",
+          "default": true
+        },
+        "waitForCompletion": {
+          "type": "boolean",
+          "description": "When true, \"start\" blocks until the user clicks stop/cancel in the audio bar UI (or another caller issues stop/cancel), then returns the final result. Set to false to return immediately after recording begins. Only used by \"start\".",
+          "default": true
         }
       },
       "required": [
@@ -586,7 +601,7 @@
     "name": "run_applescript",
     "title": "run_applescript",
     "description": "Execute an AppleScript or JXA (JavaScript for Automation) script and return the result",
-    "routePath": "computer_control/run_applescript",
+    "routePath": "computer-use/run_applescript",
     "parameters": {
       "type": "object",
       "properties": {
@@ -614,7 +629,7 @@
     "name": "screenshot",
     "title": "screenshot",
     "description": "Capture a screenshot of the entire screen and return as a displayable image",
-    "routePath": "computer_control/screenshot",
+    "routePath": "computer-use/screenshot",
     "parameters": {
       "type": "object",
       "properties": {
@@ -631,7 +646,7 @@
     "name": "scroll",
     "title": "scroll",
     "description": "Scroll the page in a direction or scroll a specific element into view",
-    "routePath": "computer_control/scroll",
+    "routePath": "computer-use/scroll",
     "parameters": {
       "type": "object",
       "properties": {
@@ -657,7 +672,7 @@
     "name": "snapshot",
     "title": "snapshot",
     "description": "Generate an accessibility tree snapshot with @eN references using the AX API with semantic depth tunneling.",
-    "routePath": "computer_control/snapshot",
+    "routePath": "computer-use/snapshot",
     "parameters": {
       "type": "object",
       "properties": {
@@ -687,7 +702,7 @@
     "name": "state",
     "title": "state",
     "description": "List every running app with its windows, positions, and sizes. Provides a unified view of the entire desktop state.",
-    "routePath": "computer_control/state",
+    "routePath": "computer-use/state",
     "parameters": {
       "type": "object",
       "properties": {},
@@ -698,7 +713,7 @@
     "name": "status",
     "title": "status",
     "description": "Get the current status of the computer control module: cached element count, target app, and running apps summary",
-    "routePath": "computer_control/status",
+    "routePath": "computer-use/status",
     "parameters": {
       "type": "object",
       "properties": {},
@@ -709,7 +724,7 @@
     "name": "type",
     "title": "type",
     "description": "Type text character by character using keyboard events. Optionally focus an element first by @eN index.",
-    "routePath": "computer_control/type",
+    "routePath": "computer-use/type",
     "parameters": {
       "type": "object",
       "properties": {
@@ -736,7 +751,7 @@
     "name": "wait",
     "title": "wait",
     "description": "Wait for a condition to be met (element appears/disappears, title changes, or fixed delay). Polls at the specified interval until timeout.",
-    "routePath": "computer_control/wait",
+    "routePath": "computer-use/wait",
     "parameters": {
       "type": "object",
       "properties": {
@@ -772,7 +787,7 @@
     "name": "window",
     "title": "window",
     "description": "Manage application windows: list, minimize, maximize, restore, close, move, or resize any window.",
-    "routePath": "computer_control/window",
+    "routePath": "computer-use/window",
     "parameters": {
       "type": "object",
       "properties": {
@@ -814,7 +829,7 @@
     "name": "windows",
     "title": "windows",
     "description": "List all windows of an application with their index, title, position, size, and minimized status",
-    "routePath": "computer_control/windows",
+    "routePath": "computer-use/windows",
     "parameters": {
       "type": "object",
       "properties": {

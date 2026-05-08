@@ -27,7 +27,7 @@ export interface SnapshotResult {
     elementMap: Record<string, ElementDescriptor>;
 }
 
-// ─── Swift Helper Process (persistent, like Chrome Extension for browser_control) ──
+// ─── Swift Helper Process (persistent, like Chrome Extension for browser-use) ──
 
 let _process: ChildProcess | null = null;
 let _readline: Interface | null = null;
@@ -41,7 +41,7 @@ function getHelperPath(): string {
 
     const home = process.env.HOME || "/Users/" + process.env.USER;
     const candidates = [
-        path.join(home, ".config/enconvo/extension/computer_control/assets/accessibility-helper"),
+        path.join(home, ".config/enconvo/extension/computer-use/assets/accessibility-helper"),
     ];
 
     for (const p of candidates) {
@@ -127,7 +127,7 @@ function ensureHelper(): Promise<void> {
 
 /**
  * Send a command to the Swift accessibility helper and return the result.
- * This is the core communication function — equivalent to browser_control's sendBrowserAction().
+ * This is the core communication function — equivalent to browser-use's sendBrowserAction().
  */
 export async function sendHelperCommand(method: string, params: Record<string, any> = {}): Promise<any> {
     await ensureHelper();

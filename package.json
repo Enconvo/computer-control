@@ -1,9 +1,9 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
-  "name": "computer_control",
-  "version": "0.0.22",
+  "name": "computer-use",
+  "version": "0.0.48",
   "description": "Control any macOS application using the Accessibility API. Navigate UI trees, click elements, type text, take screenshots, read content, scroll, and more. Works with any app that supports macOS accessibility — Finder, System Settings, Notes, Xcode, and beyond.",
-  "title": "Computer Control",
+  "title": "Computer Use",
   "icon": "icon.png",
   "author": "EnconvoAI",
   "categories": [

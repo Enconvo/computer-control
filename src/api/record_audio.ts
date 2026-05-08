@@ -6,8 +6,14 @@ interface RecordAudioParams {
     action: "start" | "pause" | "resume" | "stop" | "cancel" | "status";
     /** Output file path without extension. Only used by "start". Defaults to ~/Documents/.enconvo/MeetingRecordings/Recording-<timestamp> */
     outputPath?: string;
-    /** Bundle IDs of apps to include in system audio capture. Empty array records all apps. Only used by "start". */
+    /** Bundle IDs of apps to include in system audio capture. Empty array records all running apps. Only used by "start" and only when recordSystemAudio is true. */
     includingApplications?: string[];
+    /** Capture the microphone. Only used by "start". @default true */
+    recordMicrophone?: boolean;
+    /** Capture system audio via ScreenCaptureKit. Only used by "start". @default true */
+    recordSystemAudio?: boolean;
+    /** When true, "start" blocks until the user clicks stop/cancel in the audio bar UI (or another caller issues stop/cancel), then returns the final result. Set to false to return immediately after recording begins. Only used by "start". @default true */
+    waitForCompletion?: boolean;
 }
 
 /** Response returned by the native audio recorder. Shape depends on action. */
@@ -20,6 +26,8 @@ interface RecordAudioResponse {
         duration?: number;
         /** WAV file path. Populated on stop when recording succeeded. */
         path?: string;
+        /** True when the recording ended via cancel. Only set when "start" was called with waitForCompletion=true. */
+        cancelled?: boolean;
     };
 }
 
@@ -41,6 +49,15 @@ export default async function main(request: Request) {
     if (params.outputPath !== undefined) payload.outputPath = params.outputPath;
     if (params.includingApplications !== undefined) {
         payload.includingApplications = params.includingApplications;
+    }
+    if (params.recordMicrophone !== undefined) {
+        payload.recordMicrophone = params.recordMicrophone;
+    }
+    if (params.recordSystemAudio !== undefined) {
+        payload.recordSystemAudio = params.recordSystemAudio;
+    }
+    if (params.waitForCompletion !== undefined) {
+        payload.waitForCompletion = params.waitForCompletion;
     }
 
     const result = (await Commander.send("recordAudio", payload)) as RecordAudioResponse;
